@@ -23,6 +23,7 @@ SOURCES += main.cpp \
     descriptors/historgamgesturedescriptor.cpp \
     common/gesturelibrary.cpp \
     histogram/historgamshadowdescriptor.cpp \
+    gda/histogramgda.cpp
 
 HEADERS += \
     frameproducers/abstractframeproducer.h \
@@ -32,6 +33,7 @@ HEADERS += \
     descriptors/historgamgesturedescriptor.h \
     common/gesturelibrary.h \
     historgam/historgamshadowdescriptor.h \
+    gda/histogramgda.h
 
 
 include(libs.pri)
