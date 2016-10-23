@@ -34,7 +34,6 @@ protected:
 	 */
 	void onFrameGenerated(cv::Mat& frame);
 	
-private:
 	cv::Mat lastFrame;
 };
 

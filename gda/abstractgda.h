@@ -15,7 +15,7 @@ public:
 	~AbstractGDA();
 	
 	/**
-	 * @brief Links the algorithm to a source of video frames to consume.
+	 * @brief Links the algorithm to a source of video frames to consume. GDA is not responsible for freeing it.
 	 * When linked, consumes every produced frame (see onNextFrameConsumed).
 	 * @param producer - the source of video frames
 	 */
@@ -44,6 +44,8 @@ protected:
 	 * @param candidate - the obtained descriptor that can be a predefined gesture.
 	 */
 	void onGestureCandidate(AbstractGestureDescriptor& candidate);
+	
+	double matchingAccuracy;
 	
 private:
 	AbstractFrameProducer* frameProducer;
