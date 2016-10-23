@@ -14,6 +14,11 @@ public:
 	AbstractGDA();
 	~AbstractGDA();
 	
+	/**
+	 * @brief Links the algorithm to a source of video frames to consume.
+	 * When linked, consumes every produced frame (see onNextFrameConsumed).
+	 * @param producer - the source of video frames
+	 */
 	void consume(AbstractFrameProducer& producer);
 	
 protected:
@@ -30,6 +35,14 @@ protected:
 	 * @param gestureId - the id of the gesture in the library
 	 */
 	void onGestureDetected(int gestureId);
+	
+	/**
+	 * @brief Call this method every time you obtained a gesture descriptor.
+	 * It will call internally GestureLibrary::match to chech if the candidate
+	 * is a predefined gesture. If a match found, it will emit signal
+	 * GESTURE_DETECTED internally.
+	 * @param candidate - the obtained descriptor that can be a predefined gesture.
+	 */
 	void onGestureCandidate(AbstractGestureDescriptor& candidate);
 	
 private:
