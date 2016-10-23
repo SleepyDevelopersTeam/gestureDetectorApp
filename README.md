@@ -1,5 +1,8 @@
 # gestureDetectorApp
 
+**IMPORTANT**: do not forget to create `libs.pri` file where to include your OpenCV libs.
+It's included in main `.pro` file, so nothing will build without it.
+
 ## План на уир:
 
 **12.10.16** Составление и реализация основной структуры системы
