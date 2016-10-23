@@ -16,21 +16,22 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp \
-    abstractframeproducer.cpp \
-    webcameraframeproducer.cpp \
-    abstractgda.cpp \
-    abstractgesturedescriptor.cpp \
-    gesturelibrary.cpp \
-    historgamshadowdescriptor.cpp \
-    historgamgesturedescriptor.cpp
+    frameproducers/abstractframeproducer.cpp \
+    frameproducers/webcameraframeproducer.cpp \
+    gda/abstractgda.cpp \
+    descriptors/abstractgesturedescriptor.cpp \
+    descriptors/historgamgesturedescriptor.cpp \
+    common/gesturelibrary.cpp \
+    histogram/historgamshadowdescriptor.cpp \
 
 HEADERS += \
-    abstractframeproducer.h \
-    webcameraframeproducer.h \
-    abstractgda.h \
-    abstractgesturedescriptor.h \
-    gesturelibrary.h \
-    historgamshadowdescriptor.h \
-    historgamgesturedescriptor.h
+    frameproducers/abstractframeproducer.h \
+    frameproducers/webcameraframeproducer.h \
+    gda/abstractgda.h \
+    descriptors/abstractgesturedescriptor.h \
+    descriptors/historgamgesturedescriptor.h \
+    common/gesturelibrary.h \
+    historgam/historgamshadowdescriptor.h \
+
 
 include(libs.pri)
