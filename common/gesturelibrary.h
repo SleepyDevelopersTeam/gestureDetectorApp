@@ -2,22 +2,25 @@
 #define GESTURELIBRARY_H
 
 #include "descriptors/abstractgesturedescriptor.h"
+#include <vector>
 
 /**
  * @brief The GestureLibrary class stores all predefined gestures and allows
  * to match somehow obtained descriptors to them.
  * GestureLibrary is a singletone.
+ * GestureLibrary is responsible for freeing its resources (descriptors).
  */
 class GestureLibrary
 {
 public:
 	GestureLibrary();
+	~GestureLibrary();
 	
 	/**
 	 * @brief getInstance implements the lazy singletone initialization.
 	 * @return the only instance of GestureLibrary
 	 */
-	static GestureLibrary& getInstance();
+	static GestureLibrary* getInstance();
 	
 	/**
 	 * @brief Adds a gesture to the library
@@ -32,7 +35,11 @@ public:
 	 * @param accuracy - the accuracy parameter when comapring descriptors
 	 * @return index of first matched gesture or -1 if no matches
 	 */
-	int matchGesture(AbstractGestureDescriptor& desc, double accuracy);
+	static int matchGesture(AbstractGestureDescriptor& desc, double accuracy);
+	
+private:
+	std::vector<AbstractGestureDescriptor*> content;
+	static GestureLibrary* instance;
 };
 
 #endif // GESTURELIBRARY_H
