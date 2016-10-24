@@ -21,6 +21,21 @@ public:
 	 */
 	void consume(AbstractFrameProducer& producer);
 	
+	/**
+	 * @brief Stops consuming frames from FrameProducer and disconnects from it.
+	 * Method does not free the FrameProducer, but nulls link for it.
+	 */
+	void stopConsuming();
+	
+	/**
+	 * @brief Returns calculated value of the GDA fitness to processed data.
+	 * Return values are to be in [0..1] range, where 1 means perfect GDA work
+	 * and 0 means inapplicability.
+	 * This mechanism is used inside AdaptiveGDA.
+	 * @return The fitness in range of [0..1] or a negative value if fitness cannot be calculated now.
+	 */
+	double getFitness();
+	
 protected:
 	/**
 	 * @brief Implement your main algorithm logic inside this method.
@@ -45,7 +60,19 @@ protected:
 	 */
 	void onGestureCandidate(AbstractGestureDescriptor& candidate);
 	
+	/**
+	 * @brief Variable is used to compare gesture candidates with gesture models in library
+	 */
 	double matchingAccuracy;
+	
+	/**
+	 * @brief Variable is used to store fitness of this algorithm in application to data
+	 * it obtains from frameProducer. You should store here a value in range of [0..1].
+	 * Value can be calculated either of last frame or of last N frames, but it should
+	 * represent quite actual fitness.
+	 * If value cannot be obtained at a particular moment, place any negative value here.
+	 */
+	double alorithmFitness;
 	
 private:
 	AbstractFrameProducer* frameProducer;
