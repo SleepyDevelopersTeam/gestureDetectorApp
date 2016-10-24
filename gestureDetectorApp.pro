@@ -23,7 +23,8 @@ SOURCES += main.cpp \
     descriptors/historgamgesturedescriptor.cpp \
     common/gesturelibrary.cpp \
     histogram/historgamshadowdescriptor.cpp \
-    gda/histogramgda.cpp
+    gda/histogramgda.cpp \
+    common/utils/normalizearray.cpp
 
 HEADERS += \
     frameproducers/abstractframeproducer.h \
