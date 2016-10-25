@@ -6,7 +6,7 @@
  * @param len - length of the array
  */
 template<typename T>
-void normalizeArray(T* arr, size_t len)
+void normalizeArray(T* arr, const size_t& len)
 {
 	if (len == 0) return;
 	T sum = arr[0];

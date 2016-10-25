@@ -23,6 +23,9 @@ SOURCES += main.cpp \
     descriptors/historgamgesturedescriptor.cpp \
     common/gesturelibrary.cpp \
     histogram/historgamshadowdescriptor.cpp \
+    histogram/foneaccumulator.cpp \
+    histogram/accumulator.cpp \
+    histogram/gesturedetector.cpp \
     gda/histogramgda.cpp \
     common/utils/normalizearray.cpp
 
@@ -33,7 +36,10 @@ HEADERS += \
     descriptors/abstractgesturedescriptor.h \
     descriptors/historgamgesturedescriptor.h \
     common/gesturelibrary.h \
-    historgam/historgamshadowdescriptor.h \
+    histogram/historgamshadowdescriptor.h \
+    histogram/foneaccumulator.h \
+    histogram/accumulator.h \
+    histogram/gesturedetector.h \
     gda/histogramgda.h
 
 
