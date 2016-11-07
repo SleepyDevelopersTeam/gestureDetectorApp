@@ -5,6 +5,8 @@
 
 class HistogramGDA: public AbstractGDA
 {
+	Q_OBJECT
+	
 public:
 	HistogramGDA();
 	~HistogramGDA();

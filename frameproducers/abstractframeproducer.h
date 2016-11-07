@@ -2,9 +2,12 @@
 #define ABSTRACTFRAMEPRODUCER_H
 
 #include <opencv/cv.h>
+#include <QObject>
 
-class AbstractFrameProducer
+class AbstractFrameProducer: public QObject
 {
+	Q_OBJECT
+	
 public:
 	AbstractFrameProducer();
 	~AbstractFrameProducer();
@@ -25,15 +28,25 @@ public:
 	 */
 	virtual void startProducing() = 0;
 	
+signals:
+	/**
+	 * @brief Notifies that a new frame was produced
+	 * @param frame - the produced frame
+	 */
+	void frameProduced (cv::Mat& frame);
+	
 protected:
 	
 	/**
 	 * @brief Call this function every time a new video frame is produced.
-	 * Emits FRAME_PRODUCED signal internally.
+	 * Emits frameProduced signal internally.
 	 * @param frame - the newly produced frame
 	 */
 	void onFrameGenerated(cv::Mat& frame);
 	
+	/**
+	 * @brief Use this field as a mat that stores obtained image
+	 */
 	cv::Mat lastFrame;
 };
 

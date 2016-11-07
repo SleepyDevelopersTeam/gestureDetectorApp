@@ -11,12 +11,17 @@ AbstractGDA::AbstractGDA()
 void AbstractGDA::consume(AbstractFrameProducer& producer)
 {
 	this->frameProducer = &producer;
-	// TODO: subscribe to a signal here
+	connect(frameProducer, SIGNAL(frameProduced(cv::Mat&)), this, SLOT(frameProduced(cv::Mat&)));
+}
+
+void AbstractGDA::frameProduced(cv::Mat &frame)
+{
+	onNextFrameConsumed(frame);
 }
 
 void AbstractGDA::stopConsuming()
 {
-	// TODO: unsubscribe from a signal here
+	disconnect(frameProducer, SIGNAL(frameProduced(cv::Mat&)), this, SLOT(frameProduced(cv::Mat&)));
 	this->frameProducer = 0;
 }
 
@@ -31,10 +36,15 @@ void AbstractGDA::onGestureCandidate(AbstractGestureDescriptor &candidate)
 
 void AbstractGDA::onGestureDetected(int gestureId)
 {
-	// TODO: emit a signal here
+	emit gestureDetected(gestureId);
 }
 
 double AbstractGDA::getFitness()
 {
 	return this->alorithmFitness;
+}
+
+AbstractGDA::~AbstractGDA()
+{
+	
 }

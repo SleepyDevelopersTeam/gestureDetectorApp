@@ -5,6 +5,8 @@
 
 class WebCameraFrameProducer : public AbstractFrameProducer
 {
+	Q_OBJECT
+	
 public:
 	WebCameraFrameProducer();
 	~WebCameraFrameProducer();

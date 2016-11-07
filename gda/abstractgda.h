@@ -2,14 +2,17 @@
 #define ABSTRACTGDA_H
 
 #include <opencv/cv.h>
+#include <QObject>
 #include "frameproducers/abstractframeproducer.h"
 #include "descriptors/abstractgesturedescriptor.h"
 
 /**
  * @brief The Abstract Gesture Detector Algorithm class
  */
-class AbstractGDA
+class AbstractGDA: public QObject
 {
+	Q_OBJECT
+	
 public:
 	AbstractGDA();
 	~AbstractGDA();
@@ -35,6 +38,9 @@ public:
 	 * @return The fitness in range of [0..1] or a negative value if fitness cannot be calculated now.
 	 */
 	double getFitness();
+	
+signals:
+	void gestureDetected(int gestureId);
 	
 protected:
 	/**
@@ -73,6 +79,9 @@ protected:
 	 * If value cannot be obtained at a particular moment, place any negative value here.
 	 */
 	double alorithmFitness;
+	
+private slots:
+	void frameProduced(cv::Mat& frame);
 	
 private:
 	AbstractFrameProducer* frameProducer;

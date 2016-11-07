@@ -9,3 +9,8 @@ void WebCameraFrameProducer::startProducing()
 {
 	
 }
+
+WebCameraFrameProducer::~WebCameraFrameProducer()
+{
+	
+}
