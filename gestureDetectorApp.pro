@@ -27,7 +27,8 @@ SOURCES += main.cpp \
     histogram/accumulator.cpp \
     histogram/gesturedetector.cpp \
     gda/histogramgda.cpp \
-    common/utils/normalizearray.cpp
+    common/utils/normalizearray.cpp \
+    gl/abstractgesturelistener.cpp
 
 HEADERS += \
     frameproducers/abstractframeproducer.h \
@@ -40,7 +41,8 @@ HEADERS += \
     histogram/foneaccumulator.h \
     histogram/accumulator.h \
     histogram/gesturedetector.h \
-    gda/histogramgda.h
+    gda/histogramgda.h \
+    gl/abstractgesturelistener.h
 
 
 include(libs.pri)
