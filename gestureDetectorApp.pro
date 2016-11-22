@@ -30,7 +30,8 @@ SOURCES += main.cpp \
     gda/histogramgda.cpp \
     common/utils/normalizearray.cpp \
     gl/abstractgesturelistener.cpp \
-    frameproducers/lncframeproducer.cpp
+    frameproducers/lncframeproducer.cpp \
+    common/utils/displayframeconsumer.cpp
 
 HEADERS += \
     frameproducers/abstractframeproducer.h \
@@ -45,7 +46,8 @@ HEADERS += \
     histogram/gesturedetector.h \
     gda/histogramgda.h \
     gl/abstractgesturelistener.h \
-    frameproducers/lncframeproducer.h
+    frameproducers/lncframeproducer.h \
+    common/utils/displayframeconsumer.h
 
 
 include(libs.pri)
