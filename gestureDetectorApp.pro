@@ -5,6 +5,7 @@
 #-------------------------------------------------
 
 QT       += core
+QT       += network
 
 QT       -= gui
 
@@ -28,7 +29,8 @@ SOURCES += main.cpp \
     histogram/gesturedetector.cpp \
     gda/histogramgda.cpp \
     common/utils/normalizearray.cpp \
-    gl/abstractgesturelistener.cpp
+    gl/abstractgesturelistener.cpp \
+    frameproducers/lncframeproducer.cpp
 
 HEADERS += \
     frameproducers/abstractframeproducer.h \
@@ -42,7 +44,8 @@ HEADERS += \
     histogram/accumulator.h \
     histogram/gesturedetector.h \
     gda/histogramgda.h \
-    gl/abstractgesturelistener.h
+    gl/abstractgesturelistener.h \
+    frameproducers/lncframeproducer.h
 
 
 include(libs.pri)
