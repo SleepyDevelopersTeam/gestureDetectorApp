@@ -2,6 +2,8 @@
 #include <QDebug>
 #include <QDataStream>
 #include <QNetworkInterface>
+#include <QCoreApplication>
+#include <QThread>
 #include <iostream>
 #include <opencv/cv.h>
 
@@ -10,14 +12,14 @@ const int imageFormat = CV_8UC3;
 LNCFrameProducer::LNCFrameProducer()
 {
 	myServer = new QTcpServer(this);
-	connect(myServer,SIGNAL(newConnection()),this,SLOT(newConnectionUser()));
+	connect(myServer, SIGNAL(newConnection()), this, SLOT(newConnectionUser()));
 	length  = -1;
 	command = -1;
 	width   = -1;
 	height  = -1;
-	port = 9090;
+	port = 9091;
 	
-	lastFrame = cv::Mat(0, 0, imageFormat);
+	lastFrame = cv::Mat(20, 20, imageFormat, cv::Scalar(255, 0, 0));
 }
 
 bool LNCFrameProducer::changePort(int port)
@@ -96,6 +98,7 @@ LNCFrameProducer::~LNCFrameProducer()
 
 void LNCFrameProducer::startServer()
 {
+	findLocalAddress();
 	if(myServer->listen(QHostAddress(adr), port))
 	{
 		// QString text=QTime::currentTime().toString()+">>"+"server started in "+ myServer->serverAddress().toString()+"; port: "+ QString::number(myServer->serverPort());
@@ -103,7 +106,7 @@ void LNCFrameProducer::startServer()
 	}
 	else
 	{
-		std::cout << "Cannot start server on specified port " << port << std::endl;
+		std::cout << "Cannot start server on " << adr.toStdString() << ":" << port << std::endl;
 		std::cout << "May be this port is already in use" << std::endl;
 	}
 }
@@ -113,13 +116,14 @@ void LNCFrameProducer::stopServer()
 	myServer->close();
 	camera->deleteLater();
 	std::cout << "Server stopped" << std::endl;
+	QCoreApplication::instance()->exit(0);
 }
 
 void LNCFrameProducer::newConnectionUser()
 {
 	camera = myServer->nextPendingConnection();
-	connect(camera,SIGNAL(readyRead()),this,SLOT(readMsg()));
-	connect(camera,SIGNAL(disconnected()),this,SLOT(disconnectUser()));
+	connect(camera, SIGNAL(readyRead()), this, SLOT(readMsg()));
+	connect(camera, SIGNAL(disconnected()), this, SLOT(disconnectUser()));
 }
 
 void LNCFrameProducer::disconnectUser()
@@ -135,6 +139,11 @@ void LNCFrameProducer::readMsg()
 	if (!read(command)) {
 		std::cout << "Error while reading command! Ignoring..." << std::endl;
 	}
+
+	// traces commands
+//	qDebug() << "Cmd " << (int)command;
+//	temp++;
+//	if (temp > 10) stopServer();
 	
 	// SDTUDTP3Km
 	// see https://github.com/SleepyDevelopersTeam/AndroidVideoStreamer/blob/master/README.md
@@ -153,11 +162,14 @@ void LNCFrameProducer::readMsg()
 			qDebug() << "Client is disconnecting";
 			command = -1;
 			stopServer();
+			// and after this restarting it to wait for a new connection, eternally
+			startServer();
 			break;
 		}
 		case LENGTH_CHANGE:
 		{
-			if(!read(length)) return;
+			if (!read(length)) return;
+			qDebug() << "Length changed to " << length;
 			sendMsg(COMAND_EXECUTED);
 			command = -1;
 			break;

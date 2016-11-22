@@ -7,12 +7,14 @@
 
 class LNCFrameProducer : public AbstractFrameProducer
 {
+	Q_OBJECT
 public:
 	LNCFrameProducer();
 	~LNCFrameProducer();
 	QTcpServer* myServer;
 	short width;
 	short height;
+	int temp = 0;
 	QVector<char> data;
 	
 	bool changePort(int port);

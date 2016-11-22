@@ -1,6 +1,7 @@
 #include "displayframeconsumer.h"
 #include <opencv/highgui.h>
 #include <opencv2/opencv.hpp>
+#include <QDebug>
 
 DisplayFrameConsumer::DisplayFrameConsumer(std::string wname)
 {

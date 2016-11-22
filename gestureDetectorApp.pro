@@ -9,6 +9,8 @@ QT       += network
 
 QT       -= gui
 
+QMAKE_CXXFLAGS += -std=gnu++0x
+
 TARGET = gestureDetectorApp
 CONFIG   += console
 CONFIG   -= app_bundle
