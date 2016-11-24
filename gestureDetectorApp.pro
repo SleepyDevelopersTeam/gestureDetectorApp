@@ -33,7 +33,9 @@ SOURCES += main.cpp \
     common/utils/normalizearray.cpp \
     gl/abstractgesturelistener.cpp \
     frameproducers/lncframeproducer.cpp \
-    common/utils/displayframeconsumer.cpp
+    common/utils/displayframeconsumer.cpp \
+    gl/consoleloggesturelistener.cpp \
+    gl/appclosegesturelistener.cpp
 
 HEADERS += \
     frameproducers/abstractframeproducer.h \
@@ -49,7 +51,9 @@ HEADERS += \
     gda/histogramgda.h \
     gl/abstractgesturelistener.h \
     frameproducers/lncframeproducer.h \
-    common/utils/displayframeconsumer.h
+    common/utils/displayframeconsumer.h \
+    gl/consoleloggesturelistener.h \
+    gl/appclosegesturelistener.h
 
 
 include(libs.pri)
