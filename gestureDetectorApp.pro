@@ -35,7 +35,8 @@ SOURCES += main.cpp \
     frameproducers/lncframeproducer.cpp \
     common/utils/displayframeconsumer.cpp \
     gl/consoleloggesturelistener.cpp \
-    gl/appclosegesturelistener.cpp
+    gl/appclosegesturelistener.cpp \
+    common/backgrounddetector.cpp
 
 HEADERS += \
     frameproducers/abstractframeproducer.h \
@@ -53,7 +54,8 @@ HEADERS += \
     frameproducers/lncframeproducer.h \
     common/utils/displayframeconsumer.h \
     gl/consoleloggesturelistener.h \
-    gl/appclosegesturelistener.h
+    gl/appclosegesturelistener.h \
+    common/backgrounddetector.h
 
 
 include(libs.pri)
