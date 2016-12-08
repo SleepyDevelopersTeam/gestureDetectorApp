@@ -36,7 +36,8 @@ SOURCES += main.cpp \
     common/utils/displayframeconsumer.cpp \
     gl/consoleloggesturelistener.cpp \
     gl/appclosegesturelistener.cpp \
-    common/backgrounddetector.cpp
+    common/backgrounddetector.cpp \
+    histogram/histogram.cpp
 
 HEADERS += \
     frameproducers/abstractframeproducer.h \
@@ -55,7 +56,8 @@ HEADERS += \
     common/utils/displayframeconsumer.h \
     gl/consoleloggesturelistener.h \
     gl/appclosegesturelistener.h \
-    common/backgrounddetector.h
+    common/backgrounddetector.h \
+    histogram/histogram.h
 
 
 include(libs.pri)
