@@ -56,8 +56,8 @@ void LNCFrameProducer::decodeImage()
 	for (int i = 0, ci = ii; i < height; ++i, ci += di) {
 		for (int j = 0, cj = ij; j < width; ++j, cj += dj) {
 			int y = (0xff & ((int) data[ci * width + cj]));
-			int v = (0xff & ((int) data[frameSize + (ci >> 1) * width + (cj & ~1) + 0]));
-			int u = (0xff & ((int) data[frameSize + (ci >> 1) * width + (cj & ~1) + 1]));
+			int u = (0xff & ((int) data[frameSize + (ci >> 1) * width + (cj & ~1) + 0]));
+			int v = (0xff & ((int) data[frameSize + (ci >> 1) * width + (cj & ~1) + 1]));
 			y = y < 16 ? 16 : y;
 
 			int r = (int) (1.164f * (y - 16) + 1.596f * (v - 128));
