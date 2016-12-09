@@ -5,11 +5,16 @@
 #include <opencv/cv.h>
 #include "frameproducers/abstractframeproducer.h"
 
+// TODO: temporary functionality to debug preproducing
+#include "histogram/shadowpreproducer.h"
+#include "common/backgrounddetector.h"
+
 class DisplayFrameConsumer: public QObject
 {
 	Q_OBJECT
 public:
 	DisplayFrameConsumer(std::string wname);
+	~DisplayFrameConsumer();
 	
 	void consume(AbstractFrameProducer& producer);
 	
@@ -18,6 +23,8 @@ public slots:
 	
 private:
 	std::string windowName;
+	ShadowPreproducer sp;
+	BackgroundDetector* bd;
 };
 
 #endif // DISPLAYFRAMECONSUMER_H

@@ -3,7 +3,7 @@
 
 int BackgroundDetector::dispThreshold;
 int BackgroundDetector::maxN;
-int BackgroundDetector::forceLearnDuration = 60;
+int BackgroundDetector::forceLearnDuration = 30;
 
 BackgroundDetector::BackgroundDetector(size_t width, size_t height)
 {
