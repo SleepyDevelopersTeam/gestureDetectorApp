@@ -1,6 +1,6 @@
 #include <QCoreApplication>
 
-#include "frameproducers/lncframeproducer.h"
+#include "frameproducers/webcameraframeproducer.h"
 #include "common/utils/displayframeconsumer.h"
 
 int main(int argc, char *argv[])
@@ -29,7 +29,7 @@ int main(int argc, char *argv[])
 	 */
 	
 	QCoreApplication a(argc, argv);
-	LNCFrameProducer fproducer;
+	WebCameraFrameProducer fproducer;
 	DisplayFrameConsumer displayer("Obtained image");
 	displayer.consume(fproducer);
 	fproducer.startProducing();

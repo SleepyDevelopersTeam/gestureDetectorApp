@@ -34,6 +34,7 @@ public:
 	void tracking(cv::Mat* nextFrame);
 	void getForegroundMask(cv::Mat& thresholded);
 	void getBackgroundMask(cv::Mat& thresholded);
+	void getDisplayableDisp(cv::Mat& result);
 	void accumulateAndTrack(cv::Mat *nextFrame);
 	
 	~BackgroundDetector();

@@ -7,7 +7,7 @@ int BackgroundDetector::forceLearnDuration = 30;
 
 BackgroundDetector::BackgroundDetector(size_t width, size_t height)
 {
-	dispThreshold = 20;
+	dispThreshold = 10;
 	maxN = 100;
 	
 	trackedPixelsThreshold = 0.5F;
@@ -47,7 +47,7 @@ void BackgroundDetector::accumulate(cv::Mat *nextFrame)
 			uchar N = n->at<uchar>(y, x);
 			uint mean = 0;
 			uint disp = 0;
-			if (N!=0)
+			if (N != 0)
 			{
 				mean = accumulatedMean / N;
 				disp = accumulatedDisp / N;
@@ -106,7 +106,35 @@ void BackgroundDetector::accumulate(cv::Mat *nextFrame)
 
 void BackgroundDetector::getForegroundMask(cv::Mat& thresholded)
 {
-	threshold(*dispAccumulator, thresholded, dispThreshold, (uchar) 255, 0);
+	threshold(*tracked, thresholded, dispThreshold, (uchar) 255, 0);
+}
+
+void BackgroundDetector::getDisplayableDisp(cv::Mat &result)
+{
+	// each pixel
+	for (int y = 0; y < height; ++y)
+	{
+		for (int x = 0; x < width; ++x)
+		{
+			uint accumulatedDisp = dispAccumulator->at<uint>(y, x);
+			uchar N = n->at<uchar>(y, x);
+			uint disp = 0;
+			if (N != 0)
+			{
+				disp = accumulatedDisp / N;
+			}
+			
+			result.at<uchar>(y, x) = (uchar) disp;
+			
+			if (forceFoneAccumulating)
+			{
+				if (x < 10 && y < 5)
+				{
+					result.at<uchar>(y, x) = 255;
+				}
+			}
+		}
+	}
 }
 
 void BackgroundDetector::enableForceAccumulating()
