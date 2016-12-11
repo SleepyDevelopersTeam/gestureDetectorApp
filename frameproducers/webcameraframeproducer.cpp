@@ -19,5 +19,6 @@ void WebCameraFrameProducer::startProducing()
 
 WebCameraFrameProducer::~WebCameraFrameProducer()
 {
-	
+	delete webcam;
+	delete lastFrameIpl;
 }

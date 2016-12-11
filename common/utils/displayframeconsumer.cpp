@@ -39,6 +39,25 @@ void DisplayFrameConsumer::consumeFrame(cv::Mat &frame)
 	if (largestBlob.width > 0 && largestBlob.height > 0)
 		cv::imshow("Raw", grayscale(largestBlob));
 	
+//	cv::Vec3b colors[] = {
+//		cv::Vec3b(255, 0 ,0),
+//		cv::Vec3b(255, 160, 0),
+//		cv::Vec3b(160, 0, 160),
+//		cv::Vec3b(0, 160, 255),
+//		cv::Vec3b(0, 0, 255),
+//		cv::Vec3b(0, 160, 0)
+//	};
+//	for(int r = 0; r < frame.rows; ++r)
+//	{
+//		for(int c = 0; c < frame.cols; ++c)
+//		{
+//			int label = sp.components.at<int>(r, c);
+//			cv::Vec3b &pixel = frame.at<cv::Vec3b>(r, c);
+//			pixel = colors[label % 6];
+//		}
+//	}
+//	cv::imshow("Raw", frame);
+	
 	cv::imshow(windowName.c_str(), grayscale);
 	cv::imshow("Test", test);
 }
