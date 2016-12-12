@@ -27,6 +27,8 @@ public:
 	bool every(bool (*f)(float));
 	
 	float difference(Histogram& hist);
+
+	Histogram scale(unsigned int newLength);
 	
 private:
 	unsigned int len;

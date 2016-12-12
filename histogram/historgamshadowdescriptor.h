@@ -13,6 +13,9 @@ public:
 	bool closeEnough(HistorgamShadowDescriptor& hsd, float maxDifference);
 	
 	void createFrom(cv::Mat& mask, unsigned char threshold = 127);
+
+	Histogram* getHorizontal();
+	Histogram* getVertical();
 	
 private:
 	Histogram* horz;

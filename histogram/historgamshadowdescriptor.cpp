@@ -41,3 +41,6 @@ void HistorgamShadowDescriptor::createFrom(cv::Mat &mask, uchar threshold)
 	horz->normalize();
 	vert->normalize();
 }
+
+Histogram* HistorgamShadowDescriptor::getHorizontal() { return horz; }
+Histogram* HistorgamShadowDescriptor::getVertical() { return vert; }

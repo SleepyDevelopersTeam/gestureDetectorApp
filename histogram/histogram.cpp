@@ -101,3 +101,20 @@ float Histogram::difference(Histogram& hist)
 		sum += data[i] - hist.data[i];
 	return sum;
 }
+
+Histogram Histogram::scale(unsigned int newLength)
+{
+	if (newLength == len)
+		return Histogram(*this);
+
+	Histogram result(newLength);
+	if (newLength > len)
+	{
+		// TODO: enlarge the hist
+	}
+	else
+	{
+		// TODO: shrink the hist
+	}
+	return result;
+}
