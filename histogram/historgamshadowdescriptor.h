@@ -20,6 +20,7 @@ public:
 private:
 	Histogram* horz;
 	Histogram* vert;
+	unsigned len;
 };
 
 #endif // HISTORGAMSHADOWDESCRIPTOR_H

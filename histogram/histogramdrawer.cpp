@@ -1,17 +1,28 @@
 #include "histogramdrawer.h"
 
-HistogramDrawer::HistogramDrawer()
+HistogramDrawer::HistogramDrawer(float horzAmount, float vertAmount)
 {
 	canvas.create(1, 1, CV_8U);
+	horzHistAmount = horzAmount;
+	vertHistAmount = vertAmount;
 }
 
 void HistogramDrawer::draw(cv::Mat &shadow, HistorgamShadowDescriptor &descriptor)
 {
-	unsigned additionalWidth = (unsigned) (shadow.cols * vertHistAmount);
+	unsigned additionalWidth  = (unsigned) (shadow.cols * vertHistAmount);
 	unsigned additionalHeight = (unsigned) (shadow.rows * horzHistAmount);
-	unsigned totalWidth  = additionalWidth + shadow.cols;
-	unsigned totalHeight = additionalHeight + shadow.rows;
+	unsigned hlen = descriptor.getHorizontal()->getLength();
+	unsigned vlen = descriptor.getVertical()->getLength();
+	unsigned imageWidth  = (shadow.cols >= hlen)? shadow.cols : hlen;
+	unsigned imageHeight = (shadow.rows >= vlen)? shadow.rows : vlen;
+	unsigned totalWidth  = additionalWidth  + imageWidth;
+	unsigned totalHeight = additionalHeight + imageHeight;
+
+	uchar black = 0;
+	uchar white = 255;
+
 	canvas.create(totalHeight, totalWidth, canvas.type());
+	canvas.setTo(black);
 
 	// drawing the shadow itself
 	for (unsigned x = 0; x < shadow.cols; x++)
@@ -22,10 +33,26 @@ void HistogramDrawer::draw(cv::Mat &shadow, HistorgamShadowDescriptor &descripto
 		}
 	}
 
+	// assuming that both hists are normalized
 	// drawing the horizontal hist
-	unsigned hlen = descriptor.getHorizontal()->getLength();
-	for (unsigned x = 0; x < descriptor.getHorizontal()->getLength(); x++)
+	float max = descriptor.getHorizontal()->max();
+	for (unsigned x = 0; x < hlen; x++)
 	{
-		// TODO
+		unsigned lim = (unsigned int) ((1 - descriptor.getHorizontal()->at(x) / max) * additionalHeight);
+		for (unsigned y = 0; y < additionalHeight; y++)
+		{
+			canvas.at<uchar>(y, x) = ((y > lim)? white: black);
+		}
+	}
+
+	// drawing the vertical hist
+	max = descriptor.getVertical()->max();
+	for (unsigned y = 0; y < vlen; y++)
+	{
+		unsigned lim = (unsigned int) (descriptor.getVertical()->at(y) / max * additionalWidth);
+		for (unsigned x = 0; x < additionalWidth; x++)
+		{
+			canvas.at<uchar>(y + additionalHeight, x + imageWidth) = ((x <= lim)? white: black);
+		}
 	}
 }

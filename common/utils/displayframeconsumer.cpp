@@ -2,6 +2,7 @@
 #include <opencv/highgui.h>
 #include <opencv2/opencv.hpp>
 #include <QDebug>
+#include "histogram/historgamshadowdescriptor.h"
 
 DisplayFrameConsumer::DisplayFrameConsumer(std::string wname)
 {
@@ -11,6 +12,7 @@ DisplayFrameConsumer::DisplayFrameConsumer(std::string wname)
 	windowName = wname;
 	sp = ShadowPreproducer();
 	bd = 0;
+	drawer = HistogramDrawer(0.5F, 0.5F);
 }
 
 void DisplayFrameConsumer::consume(AbstractFrameProducer &producer)
@@ -32,13 +34,22 @@ void DisplayFrameConsumer::consumeFrame(cv::Mat &frame)
 	bd->getForegroundMask(grayscale);
 	bd->getForegroundMask(test);
 	// bd->getDisplayableDisp(test);
-	
+
 	sp.preproduce(grayscale);
-	
+
 	cv::Rect2i largestBlob = sp.findLargestBlob(grayscale);
 	if (largestBlob.width > 0 && largestBlob.height > 0)
-		cv::imshow("Raw", grayscale(largestBlob));
-	
+	{
+		cv::Mat blob = grayscale(largestBlob);
+		cv::imshow("Raw", blob);
+
+		HistorgamShadowDescriptor d(100);
+		d.createFrom(blob);
+		drawer.draw(blob, d);
+
+		cv::imshow("Test", drawer.canvas);
+	}
+
 //	cv::Vec3b colors[] = {
 //		cv::Vec3b(255, 0 ,0),
 //		cv::Vec3b(255, 160, 0),
@@ -57,9 +68,8 @@ void DisplayFrameConsumer::consumeFrame(cv::Mat &frame)
 //		}
 //	}
 //	cv::imshow("Raw", frame);
-	
+
 	cv::imshow(windowName.c_str(), grayscale);
-	cv::imshow("Test", test);
 }
 
 DisplayFrameConsumer::~DisplayFrameConsumer()

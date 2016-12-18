@@ -7,10 +7,10 @@ class ShadowPreproducer
 {
 public:
 	ShadowPreproducer();
-	
+
 	void preproduce(cv::Mat& shadow);
 	cv::Rect2i findLargestBlob(cv::Mat& shadow);
-	
+
 private:
 	cv::Mat structElem;
 	cv::Mat components;

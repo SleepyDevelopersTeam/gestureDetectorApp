@@ -7,7 +7,7 @@
 class HistogramDrawer
 {
 public:
-	HistogramDrawer();
+	HistogramDrawer(float horzAmount = 0.2F, float vertAmount = 0.2F);
 
 	void draw (cv::Mat& shadow, HistorgamShadowDescriptor& descriptor);
 

@@ -1,9 +1,11 @@
 #include "historgamshadowdescriptor.h"
+#include <QDebug>
 
 HistorgamShadowDescriptor::HistorgamShadowDescriptor(unsigned clusters)
 {
 	horz = new Histogram(clusters);
 	vert = new Histogram(clusters);
+	len = clusters;
 }
 HistorgamShadowDescriptor::~HistorgamShadowDescriptor()
 {
@@ -13,7 +15,6 @@ HistorgamShadowDescriptor::~HistorgamShadowDescriptor()
 
 bool HistorgamShadowDescriptor::closeEnough(HistorgamShadowDescriptor &hsd, float maxDifference)
 {
-	// TODO: normalize here (just before comparing) and scale hists to have the same widths
 	float x = horz->difference(*(hsd.horz));
 	float y = vert->difference(*(hsd.vert));
 	return (x*x + y*y) < maxDifference * maxDifference;
@@ -21,9 +22,12 @@ bool HistorgamShadowDescriptor::closeEnough(HistorgamShadowDescriptor &hsd, floa
 
 void HistorgamShadowDescriptor::createFrom(cv::Mat &mask, uchar threshold)
 {
-	unsigned size = horz->getLength();
 	unsigned width = mask.cols;
 	unsigned height = mask.rows;
+
+	Histogram h(width);
+	Histogram v(height);
+
 	// each pixel
 	for (unsigned y = 0; y < height; ++y)
 	{
@@ -32,13 +36,17 @@ void HistorgamShadowDescriptor::createFrom(cv::Mat &mask, uchar threshold)
 			uchar val = mask.at<uchar>(y, x);
 			if (val > threshold)
 			{
-				unsigned horzIndex = x * size / width;
-				unsigned vertIndex = y * size / height;
-				horz->at(horzIndex) += 1.0F;
-				vert->at(vertIndex) += 1.0F;
+//				unsigned horzIndex = x * len / width;
+//				unsigned vertIndex = y * len / height;
+//				horz->at(horzIndex) += 1.0F;
+//				vert->at(vertIndex) += 1.0F;
+				h[x] += 1.0F;
+				v[y] += 1.0F;
 			}
 		}
 	}
+	horz->scaledFrom(h);
+	vert->scaledFrom(v);
 	horz->normalize();
 	vert->normalize();
 }

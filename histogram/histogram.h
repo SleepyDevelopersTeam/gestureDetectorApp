@@ -6,30 +6,34 @@ class Histogram
 public:
 	Histogram(unsigned int length);
 	Histogram(const Histogram& source);
+	Histogram(const Histogram& source, unsigned int anotherLength);
 	~Histogram();
-	
+
 	unsigned int getLength();
 	float& at(unsigned int index);
-	
+
 	float& operator[](unsigned int index);
-	
+
 	void normalize();
 	void cropUpper(float upperLimit);
 	void cropLower(float lowerLimit);
 	void crop(float lowerLimit, float upperLimit);
-	
+
 	void forEach(void (*f)(float&, unsigned int));
 	void forEach(void (*f)(float&));
-	
+
 	bool some(bool (*f)(float, unsigned int));
 	bool some(bool (*f)(float));
 	bool every(bool (*f)(float, unsigned int));
 	bool every(bool (*f)(float));
-	
+
 	float difference(Histogram& hist);
 
+	float max();
+
 	Histogram scale(unsigned int newLength);
-	
+	void scaledFrom(const Histogram& source);
+
 private:
 	unsigned int len;
 	float* data;
