@@ -13,6 +13,7 @@ HistorgamShadowDescriptor::~HistorgamShadowDescriptor()
 
 bool HistorgamShadowDescriptor::closeEnough(HistorgamShadowDescriptor &hsd, float maxDifference)
 {
+	// TODO: normalize here (just before comparing) and scale hists to have the same widths
 	float x = horz->difference(*(hsd.horz));
 	float y = vert->difference(*(hsd.vert));
 	return (x*x + y*y) < maxDifference * maxDifference;
