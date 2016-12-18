@@ -18,8 +18,8 @@ public:
 	void cropLower(float lowerLimit);
 	void crop(float lowerLimit, float upperLimit);
 	
-	void forEach(float (*f)(float, unsigned int));
-	void forEach(float (*f)(float));
+	void forEach(void (*f)(float&, unsigned int));
+	void forEach(void (*f)(float&));
 	
 	bool some(bool (*f)(float, unsigned int));
 	bool some(bool (*f)(float));

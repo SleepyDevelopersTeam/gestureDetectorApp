@@ -58,12 +58,12 @@ void Histogram::crop(float lowerLimit, float upperLimit)
 
 // iteration methods
 
-void Histogram::forEach(float (*f)(float, unsigned int))
+void Histogram::forEach(void (*f)(float&, unsigned int))
 {
 	for (unsigned int i = 0; i < len; i++)
 		f(data[i], i);
 }
-void Histogram::forEach(float (*f)(float))
+void Histogram::forEach(void (*f)(float&))
 {
 	for (unsigned int i = 0; i < len; i++)
 		f(data[i]);
@@ -102,19 +102,28 @@ float Histogram::difference(Histogram& hist)
 	return sum;
 }
 
+int NOK(unsigned x, unsigned y) 
+{
+	unsigned max = (x > y)? x : y; 
+	for (unsigned i = max; ; i++) 
+		if (!(i % x) && !(i % y)) return i; 
+}
 Histogram Histogram::scale(unsigned int newLength)
 {
 	if (newLength == len)
 		return Histogram(*this);
 
 	Histogram result(newLength);
-	if (newLength > len)
-	{
-		// TODO: enlarge the hist
-	}
-	else
-	{
-		// TODO: shrink the hist
-	}
+	unsigned count = NOK(newLength, len);
+	unsigned N_this = count / len;
+	unsigned N_that = count / newLength;
+
+	for (unsigned i = 0; i < count; i++)
+		result.data[i / N_that] += data[i / N_this];
+
+	// for the sum of hist values to be preserved
+	for (unsigned i = 0; i < newLength; i++)
+		result.data[i] /= N_this;
+	
 	return result;
 }
