@@ -24,9 +24,6 @@ public slots:
 
 private:
 	std::string windowName;
-	ShadowPreproducer sp;
-	BackgroundDetector* bd;
-	HistogramDrawer drawer;
 };
 
 #endif // DISPLAYFRAMECONSUMER_H

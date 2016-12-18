@@ -73,6 +73,16 @@ cv::Rect2i ShadowPreproducer::findLargestBlob(cv::Mat &shadow)
 	if (areas[max] == 0)
 		return cv::Rect2i(0, 0, 0, 0);
 
+	// removing all pixels not belonging to max component
+	for (unsigned y = 0; y < shadow.rows; y++)
+	{
+		for (unsigned x = 0; x < shadow.cols; x++)
+		{
+			if (components.at<int>(y, x) != max)
+				shadow.at<uchar>(y, x) = 0;
+		}
+	}
+
 	int x = corners[max*4 + 0];
 	int y = corners[max*4 + 1];
 	int width  = ((int) corners[max*4 + 2]) - x + 1;
