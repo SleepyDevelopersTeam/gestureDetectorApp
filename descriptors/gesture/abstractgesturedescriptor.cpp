@@ -3,3 +3,7 @@
 AbstractGestureDescriptor::AbstractGestureDescriptor()
 {
 }
+
+AbstractGestureDescriptor::~AbstractGestureDescriptor()
+{
+}

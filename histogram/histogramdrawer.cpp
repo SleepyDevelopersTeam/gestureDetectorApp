@@ -7,7 +7,7 @@ HistogramDrawer::HistogramDrawer(float horzAmount, float vertAmount)
 	vertHistAmount = vertAmount;
 }
 
-void HistogramDrawer::draw(cv::Mat &shadow, HistorgamShadowDescriptor &descriptor)
+void HistogramDrawer::draw(cv::Mat &shadow, HistogramPoseDescriptor& descriptor)
 {
 	unsigned additionalWidth  = (unsigned) (shadow.cols * vertHistAmount);
 	unsigned additionalHeight = (unsigned) (shadow.rows * horzHistAmount);

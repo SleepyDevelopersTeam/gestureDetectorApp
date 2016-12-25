@@ -5,13 +5,14 @@
 #include "common/backgrounddetector.h"
 #include "histogram/shadowpreproducer.h"
 #include "histogram/histogramdrawer.h"
+#include "descriptors/gesture/keyposegesturedescriptor.h"
 
 class HistogramGDA: public AbstractGDA
 {
 	Q_OBJECT
 
 public:
-	HistogramGDA();
+	HistogramGDA(unsigned int maxPoses);
 	~HistogramGDA();
 
 	void enableOutput(bool showShadow, bool showBackgroundMask);
@@ -23,6 +24,7 @@ private:
 	BackgroundDetector* bgDetector;
 	ShadowPreproducer preproducer;
 	HistogramDrawer drawer;
+	KeyPoseGestureDescriptor* gesture;
 
 	unsigned int histogramLength;
 	bool showShadow;

@@ -1,7 +1,8 @@
 #ifndef GESTURELIBRARY_H
 #define GESTURELIBRARY_H
 
-#include "descriptors/abstractgesturedescriptor.h"
+#include "descriptors/gesture/abstractgesturedescriptor.h"
+#include "descriptors/pose/abstractposedescriptor.h"
 #include <vector>
 
 /**
@@ -15,20 +16,20 @@ class GestureLibrary
 public:
 	GestureLibrary();
 	~GestureLibrary();
-	
+
 	/**
 	 * @brief getInstance implements the lazy singletone initialization.
 	 * @return the only instance of GestureLibrary
 	 */
 	static GestureLibrary* getInstance();
-	
+
 	/**
 	 * @brief Adds a gesture to the library
 	 * @param desc - descriptor of the gesture
 	 * @return index of newly recorded gesture
 	 */
 	static int addGesture(AbstractGestureDescriptor& desc);
-	
+
 	/**
 	 * @brief Matches given gesture to content of the library
 	 * @param desc - descriptor of the given gesture
@@ -36,7 +37,11 @@ public:
 	 * @return index of first matched gesture or -1 if no matches
 	 */
 	static int matchGesture(AbstractGestureDescriptor& desc, double accuracy);
-	
+
+	static int addPose(AbstractPoseDescriptor& desc);
+
+	static int matchPose(AbstractPoseDescriptor& pose);
+
 private:
 	std::vector<AbstractGestureDescriptor*> content;
 	static GestureLibrary* instance;

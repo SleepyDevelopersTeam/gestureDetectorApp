@@ -19,49 +19,51 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp \
-    frameproducers/abstractframeproducer.cpp \
-    frameproducers/webcameraframeproducer.cpp \
-    gda/abstractgda.cpp \
-    descriptors/abstractgesturedescriptor.cpp \
-    descriptors/historgamgesturedescriptor.cpp \
-    common/gesturelibrary.cpp \
-    histogram/historgamshadowdescriptor.cpp \
-    histogram/foneaccumulator.cpp \
-    histogram/accumulator.cpp \
-    histogram/gesturedetector.cpp \
-    gda/histogramgda.cpp \
-    common/utils/normalizearray.cpp \
-    gl/abstractgesturelistener.cpp \
-    frameproducers/lncframeproducer.cpp \
-    common/utils/displayframeconsumer.cpp \
-    gl/consoleloggesturelistener.cpp \
-    gl/appclosegesturelistener.cpp \
-    common/backgrounddetector.cpp \
-    histogram/histogram.cpp \
-    histogram/shadowpreproducer.cpp \
-    histogram/histogramdrawer.cpp
+	frameproducers/abstractframeproducer.cpp \
+	frameproducers/webcameraframeproducer.cpp \
+	gda/abstractgda.cpp \
+	descriptors/gesture/abstractgesturedescriptor.cpp \
+	common/gesturelibrary.cpp \
+	histogram/foneaccumulator.cpp \
+	histogram/accumulator.cpp \
+	histogram/gesturedetector.cpp \
+	gda/histogramgda.cpp \
+	common/utils/normalizearray.cpp \
+	gl/abstractgesturelistener.cpp \
+	frameproducers/lncframeproducer.cpp \
+	common/utils/displayframeconsumer.cpp \
+	gl/consoleloggesturelistener.cpp \
+	gl/appclosegesturelistener.cpp \
+	common/backgrounddetector.cpp \
+	histogram/histogram.cpp \
+	histogram/shadowpreproducer.cpp \
+	histogram/histogramdrawer.cpp \
+	descriptors/pose/abstractposedescriptor.cpp \
+    descriptors/pose/histogramposedescriptor.cpp \
+    descriptors/gesture/keyposegesturedescriptor.cpp
 
 HEADERS += \
-    frameproducers/abstractframeproducer.h \
-    frameproducers/webcameraframeproducer.h \
-    gda/abstractgda.h \
-    descriptors/abstractgesturedescriptor.h \
-    descriptors/historgamgesturedescriptor.h \
-    common/gesturelibrary.h \
-    histogram/historgamshadowdescriptor.h \
-    histogram/foneaccumulator.h \
-    histogram/accumulator.h \
-    histogram/gesturedetector.h \
-    gda/histogramgda.h \
-    gl/abstractgesturelistener.h \
-    frameproducers/lncframeproducer.h \
-    common/utils/displayframeconsumer.h \
-    gl/consoleloggesturelistener.h \
-    gl/appclosegesturelistener.h \
-    common/backgrounddetector.h \
-    histogram/histogram.h \
-    histogram/shadowpreproducer.h \
-    histogram/histogramdrawer.h
+	frameproducers/abstractframeproducer.h \
+	frameproducers/webcameraframeproducer.h \
+	gda/abstractgda.h \
+	descriptors/gesture/abstractgesturedescriptor.h \
+	common/gesturelibrary.h \
+	histogram/foneaccumulator.h \
+	histogram/accumulator.h \
+	histogram/gesturedetector.h \
+	gda/histogramgda.h \
+	gl/abstractgesturelistener.h \
+	frameproducers/lncframeproducer.h \
+	common/utils/displayframeconsumer.h \
+	gl/consoleloggesturelistener.h \
+	gl/appclosegesturelistener.h \
+	common/backgrounddetector.h \
+	histogram/histogram.h \
+	histogram/shadowpreproducer.h \
+	histogram/histogramdrawer.h \
+	descriptors/pose/abstractposedescriptor.h \
+    descriptors/pose/histogramposedescriptor.h \
+    descriptors/gesture/keyposegesturedescriptor.h
 
 
 include(libs.pri)

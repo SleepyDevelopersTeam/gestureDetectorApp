@@ -36,6 +36,17 @@ int GestureLibrary::matchGesture(AbstractGestureDescriptor& desc, double accurac
 	return -1;
 }
 
+int GestureLibrary::addPose(AbstractPoseDescriptor &desc)
+{
+	// TODO
+	return -1;
+}
+int GestureLibrary::matchPose(AbstractPoseDescriptor &pose)
+{
+	// TODO
+	return -1;
+}
+
 GestureLibrary* GestureLibrary::getInstance()
 {
 	if (instance == 0)

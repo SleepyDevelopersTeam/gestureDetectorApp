@@ -1,16 +1,17 @@
 #include "histogramgda.h"
-#include "histogram/historgamshadowdescriptor.h"
+#include "descriptors/pose/histogramposedescriptor.h"
 #include <opencv/cv.h>
 #include <opencv2/highgui.hpp>
 
 const char* SHADOW_NAME = "HistogramGDA Output: Shadow";
 const char* BACKGROUND_NAME = "HistogramGDA Output: Background";
 
-HistogramGDA::HistogramGDA()
+HistogramGDA::HistogramGDA(unsigned int maxPoses)
 {
 	bgDetector = 0;
 	histogramLength = 100;
 	showShadow = showBackgroundMask = false;
+	gesture = new KeyPoseGestureDescriptor(maxPoses);
 }
 
 void HistogramGDA::onNextFrameConsumed(cv::Mat &nextFrame)
@@ -39,7 +40,7 @@ void HistogramGDA::onNextFrameConsumed(cv::Mat &nextFrame)
 	{
 		cv::Mat blob = grayscale(largestBlob);
 
-		HistorgamShadowDescriptor d(histogramLength);
+		HistogramPoseDescriptor d(histogramLength);
 		d.createFrom(blob);
 		if (showShadow)
 		{

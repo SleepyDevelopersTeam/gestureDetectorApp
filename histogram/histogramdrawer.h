@@ -2,14 +2,14 @@
 #define HISTOGRAMDRAWER_H
 
 #include <opencv2/core.hpp>
-#include "historgamshadowdescriptor.h"
+#include "descriptors/pose/histogramposedescriptor.h"
 
 class HistogramDrawer
 {
 public:
 	HistogramDrawer(float horzAmount = 0.2F, float vertAmount = 0.2F);
 
-	void draw (cv::Mat& shadow, HistorgamShadowDescriptor& descriptor);
+	void draw (cv::Mat& shadow, HistogramPoseDescriptor& descriptor);
 
 	cv::Mat canvas;
 
