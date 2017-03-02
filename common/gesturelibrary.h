@@ -44,6 +44,7 @@ public:
 
 private:
 	std::vector<AbstractGestureDescriptor*> content;
+	std::vector<AbstractPoseDescriptor*> poses;
 	static GestureLibrary* instance;
 };
 

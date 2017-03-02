@@ -5,7 +5,7 @@ class AbstractGestureDescriptor
 {
 public:
 	AbstractGestureDescriptor();
-	~AbstractGestureDescriptor();
+	virtual ~AbstractGestureDescriptor();
 	
 	/**
 	 * @brief Compares this descriptor to another with given accuracy parameter

@@ -16,8 +16,9 @@ public:
 	 * @brief Should be called on every PoseDescriptor obtained. Will internally check if
 	 * it's a key pose and modify itself.
 	 * @param The obtained descriptor.
+	 * @return Whether the gesture descriptor was modified
 	 */
-	void appendPose(AbstractPoseDescriptor* keyPoseCandidate, double accuracy);
+	bool appendPose(AbstractPoseDescriptor* keyPoseCandidate, double accuracy);
 
 private:
 	int* poses;

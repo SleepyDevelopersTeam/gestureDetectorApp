@@ -1,5 +1,6 @@
 #include "histogramgda.h"
 #include "descriptors/pose/histogramposedescriptor.h"
+#include "common/gesturelibrary.h"
 #include <opencv/cv.h>
 #include <opencv2/highgui.hpp>
 
@@ -11,7 +12,7 @@ HistogramGDA::HistogramGDA(unsigned int maxPoses)
 	bgDetector = 0;
 	histogramLength = 100;
 	showShadow = showBackgroundMask = false;
-	gesture = new KeyPoseGestureDescriptor(maxPoses);
+	gesture = new KeyPoseGestureDescriptor(maxPoses, true);
 }
 
 void HistogramGDA::onNextFrameConsumed(cv::Mat &nextFrame)
@@ -40,18 +41,20 @@ void HistogramGDA::onNextFrameConsumed(cv::Mat &nextFrame)
 	{
 		cv::Mat blob = grayscale(largestBlob);
 
-		HistogramPoseDescriptor d(histogramLength);
-		d.createFrom(blob);
+		HistogramPoseDescriptor keyPoseCandidate(histogramLength);
+		keyPoseCandidate.createFrom(blob);
 		if (showShadow)
 		{
-			drawer.draw(blob, d);
+			drawer.draw(blob, keyPoseCandidate);
 			cv::imshow(SHADOW_NAME, drawer.canvas);
 		}
+
+		bool success = gesture->appendPose(&keyPoseCandidate, matchingAccuracy);
+		if (success)
+		{
+			onGestureCandidate(*gesture);
+		}
 	}
-	// auto descriptor = HistogramShadowDescriptor::calculate(nextFrame, this->shadowDescriptorProps);
-	// recentDecriptors.push(descriptor);
-	// auto gesture = recentDescriptors.formGestureDecriptor();
-	// GestureLibrary::getInstance()->matchGesture(
 }
 
 void HistogramGDA::enableOutput(bool showShadow, bool showBackgroundMask)
@@ -71,4 +74,6 @@ HistogramGDA::~HistogramGDA()
 	delete bgDetector;
 	if (showShadow) cv::destroyWindow(SHADOW_NAME);
 	if (showBackgroundMask) cv::destroyWindow(BACKGROUND_NAME);
+
+	delete gesture;
 }

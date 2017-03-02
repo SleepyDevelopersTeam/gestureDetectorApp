@@ -71,14 +71,16 @@ bool KeyPoseGestureDescriptor::similarTo(AbstractGestureDescriptor &anotherDescr
 	return result;
 }
 
-void KeyPoseGestureDescriptor::appendPose(AbstractPoseDescriptor *keyPoseCandidate, double accuracy)
+bool KeyPoseGestureDescriptor::appendPose(AbstractPoseDescriptor *keyPoseCandidate, double accuracy)
 {
 	int poseIndex = GestureLibrary::matchPose(*keyPoseCandidate, accuracy);
 	if (poseIndex != -1)
 	{
 		// key pose found
 		pushToQueue(poseIndex);
+		return true;
 	}
+	return false;
 }
 
 void KeyPoseGestureDescriptor::pushToQueue(int next)

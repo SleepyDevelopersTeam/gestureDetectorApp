@@ -7,6 +7,8 @@ GestureLibrary* GestureLibrary::instance = 0;
 GestureLibrary::GestureLibrary()
 {
 	this->content = vector<AbstractGestureDescriptor*>();
+
+	poses = vector<AbstractPoseDescriptor*>();
 }
 
 GestureLibrary::~GestureLibrary()
@@ -16,17 +18,18 @@ GestureLibrary::~GestureLibrary()
 //		delete this->content.at(i);
 //	}
 	this->content.clear();
+	this->poses.clear();
 }
 
 int GestureLibrary::addGesture(AbstractGestureDescriptor& desc)
 {
-	instance->content.push_back(&desc);
+	getInstance()->content.push_back(&desc);
 	return instance->content.size() - 1;
 }
 
 int GestureLibrary::matchGesture(AbstractGestureDescriptor& desc)
 {
-	for (size_t i = 0; i < instance->content.size(); i++)
+	for (size_t i = 0; i < getInstance()->content.size(); i++)
 	{
 		if (desc.similarTo(*(instance->content.at(i))))
 		{
@@ -38,12 +41,18 @@ int GestureLibrary::matchGesture(AbstractGestureDescriptor& desc)
 
 int GestureLibrary::addPose(AbstractPoseDescriptor &desc)
 {
-	// TODO
-	return -1;
+	getInstance()->poses.push_back(&desc);
+	return instance->poses.size() - 1;
 }
 int GestureLibrary::matchPose(AbstractPoseDescriptor &pose, double accuracy)
 {
-	// TODO
+	for (size_t i = 0; i < getInstance()->poses.size(); i++)
+	{
+		if (pose.similarTo(*(instance->poses.at(i)), accuracy))
+		{
+			return i;
+		}
+	}
 	return -1;
 }
 
