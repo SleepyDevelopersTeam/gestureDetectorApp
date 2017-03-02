@@ -15,11 +15,15 @@ HistogramPoseDescriptor::~HistogramPoseDescriptor()
 
 bool HistogramPoseDescriptor::similarTo(AbstractPoseDescriptor &hsd, double maxDifference)
 {
-	// TODO
-//	float x = horz->difference(*(hsd.horz));
-//	float y = vert->difference(*(hsd.vert));
-//	return (x*x + y*y) < maxDifference * maxDifference;
-	return false;
+	HistogramPoseDescriptor* another = dynamic_cast <HistogramPoseDescriptor*> (&hsd);
+	if (another == 0)
+	{
+		// different types => different descriptors
+		return false;
+	}
+	float x = horz->difference(*(another->horz));
+	float y = vert->difference(*(another->vert));
+	return (x*x + y*y) < maxDifference * maxDifference;
 }
 
 void HistogramPoseDescriptor::createFrom(cv::Mat &mask, uchar threshold)

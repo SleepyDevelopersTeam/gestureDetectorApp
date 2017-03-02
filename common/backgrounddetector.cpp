@@ -18,8 +18,8 @@ BackgroundDetector::BackgroundDetector(size_t width, size_t height)
 	n = new cv::Mat(height, width, CV_8UC1);
 	tracked = new cv::Mat(height, width, CV_8UC1);
 	
-	for (int y = 0; y < height; y++)
-		for (int x = 0; x < width; x++)
+	for (unsigned y = 0; y < height; y++)
+		for (unsigned x = 0; x < width; x++)
 		{
 			meanAccumulator->at<uchar>(y, x) = 0;
 			dispAccumulator->at<uchar>(y, x) = 0;

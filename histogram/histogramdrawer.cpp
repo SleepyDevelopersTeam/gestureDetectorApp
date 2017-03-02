@@ -13,8 +13,10 @@ void HistogramDrawer::draw(cv::Mat &shadow, HistogramPoseDescriptor& descriptor)
 	unsigned additionalHeight = (unsigned) (shadow.rows * horzHistAmount);
 	unsigned hlen = descriptor.getHorizontal()->getLength();
 	unsigned vlen = descriptor.getVertical()->getLength();
-	unsigned imageWidth  = (shadow.cols >= hlen)? shadow.cols : hlen;
-	unsigned imageHeight = (shadow.rows >= vlen)? shadow.rows : vlen;
+	unsigned cols = (unsigned) shadow.cols;
+	unsigned rows = (unsigned) shadow.rows;
+	unsigned imageWidth  = (cols >= hlen)? cols : hlen;
+	unsigned imageHeight = (rows >= vlen)? rows : vlen;
 	unsigned totalWidth  = additionalWidth  + imageWidth;
 	unsigned totalHeight = additionalHeight + imageHeight;
 
@@ -25,9 +27,9 @@ void HistogramDrawer::draw(cv::Mat &shadow, HistogramPoseDescriptor& descriptor)
 	canvas.setTo(black);
 
 	// drawing the shadow itself
-	for (unsigned x = 0; x < shadow.cols; x++)
+	for (unsigned x = 0; x < cols; x++)
 	{
-		for (unsigned y = 0; y < shadow.rows; y++)
+		for (unsigned y = 0; y < rows; y++)
 		{
 			canvas.at<uchar>(y + additionalHeight, x) = shadow.at<uchar>(y, x);
 		}

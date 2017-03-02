@@ -74,11 +74,11 @@ cv::Rect2i ShadowPreproducer::findLargestBlob(cv::Mat &shadow)
 		return cv::Rect2i(0, 0, 0, 0);
 
 	// removing all pixels not belonging to max component
-	for (unsigned y = 0; y < shadow.rows; y++)
+	for (unsigned y = 0; y < (unsigned) shadow.rows; y++)
 	{
-		for (unsigned x = 0; x < shadow.cols; x++)
+		for (unsigned x = 0; x < (unsigned) shadow.cols; x++)
 		{
-			if (components.at<int>(y, x) != max)
+			if (components.at<int>(y, x) != (int) max)
 				shadow.at<uchar>(y, x) = 0;
 		}
 	}

@@ -142,6 +142,8 @@ void Histogram::scaledFrom(const Histogram& source)
 	for (unsigned i = 0; i < len; i++)
 		data[i] = 0.0F;
 
+	if (len == 0 || source.len == 0) return; // no scaling allowed with zero-length hists (who whatever uses them?)(int)
+
 	unsigned count = NOK(len, source.len);
 	unsigned N_this = count / len;
 	unsigned N_that = count / source.len;
