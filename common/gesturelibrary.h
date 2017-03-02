@@ -36,11 +36,11 @@ public:
 	 * @param accuracy - the accuracy parameter when comapring descriptors
 	 * @return index of first matched gesture or -1 if no matches
 	 */
-	static int matchGesture(AbstractGestureDescriptor& desc, double accuracy);
+	static int matchGesture(AbstractGestureDescriptor& desc);
 
 	static int addPose(AbstractPoseDescriptor& desc);
 
-	static int matchPose(AbstractPoseDescriptor& pose);
+	static int matchPose(AbstractPoseDescriptor& pose, double accuracy);
 
 private:
 	std::vector<AbstractGestureDescriptor*> content;

@@ -27,7 +27,7 @@ void AbstractGDA::stopConsuming()
 
 void AbstractGDA::onGestureCandidate(AbstractGestureDescriptor &candidate)
 {
-	int detected = GestureLibrary::matchGesture(candidate, this->matchingAccuracy);
+	int detected = GestureLibrary::matchGesture(candidate);
 	if (detected != -1)
 	{
 		this->onGestureDetected(detected);

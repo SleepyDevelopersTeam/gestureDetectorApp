@@ -24,11 +24,11 @@ int GestureLibrary::addGesture(AbstractGestureDescriptor& desc)
 	return instance->content.size() - 1;
 }
 
-int GestureLibrary::matchGesture(AbstractGestureDescriptor& desc, double accuracy)
+int GestureLibrary::matchGesture(AbstractGestureDescriptor& desc)
 {
 	for (size_t i = 0; i < instance->content.size(); i++)
 	{
-		if (desc.similarTo(*(instance->content.at(i)), accuracy))
+		if (desc.similarTo(*(instance->content.at(i))))
 		{
 			return i;
 		}
@@ -41,7 +41,7 @@ int GestureLibrary::addPose(AbstractPoseDescriptor &desc)
 	// TODO
 	return -1;
 }
-int GestureLibrary::matchPose(AbstractPoseDescriptor &pose)
+int GestureLibrary::matchPose(AbstractPoseDescriptor &pose, double accuracy)
 {
 	// TODO
 	return -1;

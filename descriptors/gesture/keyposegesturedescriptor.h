@@ -7,24 +7,26 @@
 class KeyPoseGestureDescriptor: public AbstractGestureDescriptor
 {
 public:
-	KeyPoseGestureDescriptor(unsigned int N);
+	KeyPoseGestureDescriptor(unsigned int N, bool isAccumulator = false);
 	~KeyPoseGestureDescriptor();
 
-	bool similarTo(AbstractGestureDescriptor &anotherDescriptor, double accuracy);
+	bool similarTo(AbstractGestureDescriptor &anotherDescriptor);
 
 	/**
 	 * @brief Should be called on every PoseDescriptor obtained. Will internally check if
 	 * it's a key pose and modify itself.
 	 * @param The obtained descriptor.
 	 */
-	void appendPose(AbstractPoseDescriptor* keyPoseCandidate);
+	void appendPose(AbstractPoseDescriptor* keyPoseCandidate, double accuracy);
 
 private:
-	AbstractPoseDescriptor** poses;
+	int* poses;
 	unsigned int queueStart;
 	unsigned int N;
-	void pushToQueue(AbstractPoseDescriptor* next);
-	AbstractPoseDescriptor* getPoseAt(unsigned int index);
+	void pushToQueue(int next);
+	int getPoseAt(unsigned int index);
+
+	bool isAccumulator;
 };
 
 #endif // KEYPOSEGESTUREDESCRIPTOR_H
