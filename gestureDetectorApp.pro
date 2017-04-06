@@ -37,7 +37,9 @@ SOURCES += main.cpp \
 	histogram/histogramdrawer.cpp \
 	descriptors/pose/abstractposedescriptor.cpp \
     descriptors/pose/histogramposedescriptor.cpp \
-    descriptors/gesture/keyposegesturedescriptor.cpp
+    descriptors/gesture/keyposegesturedescriptor.cpp \
+    common/utils/descriptorwriter.cpp \
+    descriptors/pose/allinoneposedescriptor.cpp
 
 HEADERS += \
 	frameproducers/abstractframeproducer.h \
@@ -57,7 +59,9 @@ HEADERS += \
 	histogram/histogramdrawer.h \
 	descriptors/pose/abstractposedescriptor.h \
     descriptors/pose/histogramposedescriptor.h \
-    descriptors/gesture/keyposegesturedescriptor.h
+    descriptors/gesture/keyposegesturedescriptor.h \
+    common/utils/descriptorwriter.h \
+    descriptors/pose/allinoneposedescriptor.h
 
 
 include(libs.pri)

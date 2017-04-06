@@ -20,6 +20,7 @@ public:
 	
 	// amount of pixels out of fone at which we need to recalculate fone
 	float trackedPixelsThreshold;
+	float lastFrameTrackedPixelsAmount;
 	
 	static int dispThreshold;
 	static int maxN;

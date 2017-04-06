@@ -60,4 +60,19 @@ void HistogramPoseDescriptor::createFrom(cv::Mat &mask, uchar threshold)
 Histogram* HistogramPoseDescriptor::getHorizontal() { return horz; }
 Histogram* HistogramPoseDescriptor::getVertical() { return vert; }
 
+void HistogramPoseDescriptor::write(std::ostream &to)
+{
+	to << "Test" << std::endl;
+	to << (int) 77;
+}
+
+std::vector<float>* HistogramPoseDescriptor::getFeaturesVector()
+{
+	std::vector<float>* v = new std::vector<float>();
+	v->push_back(1.30F);
+	v->push_back(2.00F);
+	v->push_back(3.05F);
+	return v;
+}
+
 

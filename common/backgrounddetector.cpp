@@ -89,10 +89,14 @@ void BackgroundDetector::accumulate(cv::Mat *nextFrame)
 		}
 	}
 	
-	if (foregroundPixelsCount > nextFrame->size().area() * trackedPixelsThreshold)
+	int area = nextFrame->size().area();
+	if (foregroundPixelsCount > area * trackedPixelsThreshold)
 	{
 		enableForceAccumulating();
 	}
+
+	// for quality checks
+	lastFrameTrackedPixelsAmount = foregroundPixelsCount / (float) area;
 	
 	if (forceFoneAccumulating)
 	{

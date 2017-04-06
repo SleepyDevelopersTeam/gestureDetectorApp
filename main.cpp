@@ -1,8 +1,22 @@
 #include <QCoreApplication>
 
+#include <opencv/cv.h>
+#include <opencv/highgui.h>
 #include "frameproducers/webcameraframeproducer.h"
 #include "common/utils/displayframeconsumer.h"
 #include "gda/histogramgda.h"
+#include "common/utils/descriptorwriter.h"
+#include "descriptors/pose/allinoneposedescriptor.h"
+
+AllInOnePoseDescriptor* acc = new AllInOnePoseDescriptor();
+AbstractPoseDescriptor* createDescriptor(cv::Mat& nextFrame)
+{
+	acc->accumulateNext(nextFrame);
+	if (acc->featuresCount() > 0)
+		return acc;
+	else
+		return NULL;
+}
 
 int main(int argc, char *argv[])
 {
@@ -35,9 +49,13 @@ int main(int argc, char *argv[])
 //	DisplayFrameConsumer displayer("Obtained image");
 //	displayer.consume(fproducer);
 
-	HistogramGDA gda(0);
-	gda.enableOutput(true, true);
-	gda.consume(fproducer);
+//	HistogramGDA gda(0);
+//	gda.enableOutput(true, true);
+//	gda.consume(fproducer);
+
+	DescriptorWriter dw('s', 60, "test.txt");
+	dw.setDescriptorCreator(createDescriptor);
+	dw.consume(fproducer);
 
 	fproducer.startProducing();
 	return a.exec();

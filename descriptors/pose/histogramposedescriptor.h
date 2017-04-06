@@ -12,6 +12,9 @@ public:
 	~HistogramPoseDescriptor();
 
 	bool similarTo(AbstractPoseDescriptor &anotherDescriptor, double accuracy);
+	void write(std::ostream &to);
+
+	std::vector<float>* getFeaturesVector();
 
 	void createFrom(cv::Mat& mask, unsigned char threshold = 127);
 

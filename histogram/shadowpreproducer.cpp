@@ -68,18 +68,40 @@ cv::Rect2i ShadowPreproducer::findLargestBlob(cv::Mat &shadow)
 	for (int i = 2; i < ncomp; i++)
 	{
 		if (areas[i] > areas[max])
+		{
 			max = i;
+		}
 	}
 	if (areas[max] == 0)
 		return cv::Rect2i(0, 0, 0, 0);
 
+	// counting areas of size more than half of the largest
+	int count = 0;
+	// and their total size relative to the largest
+	float totalSize = 0.0F;
+	for (int i = 1; i < ncomp; i++)
+	{
+		if (areas[i] * 2 > areas[max])
+		{
+			++count;
+			totalSize += ((float) areas[i]) / areas[max];
+		}
+	}
+
+	blobsProportion = count / (float) ncomp;
+	removedBlobsRelativeSize = totalSize;
+
 	// removing all pixels not belonging to max component
+	removedPixelsCount = 0;
 	for (unsigned y = 0; y < (unsigned) shadow.rows; y++)
 	{
 		for (unsigned x = 0; x < (unsigned) shadow.cols; x++)
 		{
 			if (components.at<int>(y, x) != (int) max)
+			{
 				shadow.at<uchar>(y, x) = 0;
+				++removedPixelsCount;
+			}
 		}
 	}
 
