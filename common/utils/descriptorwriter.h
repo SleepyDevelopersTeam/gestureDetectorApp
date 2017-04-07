@@ -22,6 +22,8 @@ public:
 
 	~DescriptorWriter();
 
+	std::string postfix;
+
 private:
 	std::string filename;
 	int interval;

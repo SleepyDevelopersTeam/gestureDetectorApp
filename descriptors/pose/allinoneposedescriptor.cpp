@@ -31,6 +31,7 @@ void AllInOnePoseDescriptor::accumulateNext(cv::Mat& nextFrame)
 	if (bgDetector == 0)
 	{
 		bgDetector = new BackgroundDetector(nextFrame.size().width, nextFrame.size().height);
+		bgDetector->trackedPixelsThreshold = 0.65F;
 	}
 	cv::Mat grayscale = cv::Mat(nextFrame.rows, nextFrame.cols, CV_8UC1, cv::Scalar(0, 0, 0));
 	// cv::Mat test = cv::Mat(frame.rows, frame.cols, CV_8UC1, cv::Scalar(0, 0, 0));
@@ -39,7 +40,7 @@ void AllInOnePoseDescriptor::accumulateNext(cv::Mat& nextFrame)
 	bgDetector->accumulate(&grayscale);
 	bgDetector->getForegroundMask(grayscale);
 
-	preproducer.preproduce(grayscale);
+	// preproducer.preproduce(grayscale);
 
 	cv::Rect2i largestBlob = preproducer.findLargestBlob(grayscale);
 	features->clear();

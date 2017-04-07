@@ -21,6 +21,8 @@ DescriptorWriter::DescriptorWriter(char writeKey, int writeEveryNthFrame, std::s
 	this->producer = NULL;
 	framesElapsed = 0;
 
+	postfix = "0";
+
 	file.open(filename);
 }
 
@@ -43,6 +45,7 @@ void DescriptorWriter::onNextFrameConsumed(cv::Mat &nextFrame)
 			std::vector<float>* features = desc->getFeaturesVector();
 			std::string cat = joinFeatures(features);
 			file << cat << std::endl;
+			file << postfix << std::endl;
 			std::cout << "Written to file: " << filename << std::endl;
 			delete features;
 		}

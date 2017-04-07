@@ -55,6 +55,7 @@ int main(int argc, char *argv[])
 
 	DescriptorWriter dw('s', 60, "test.txt");
 	dw.setDescriptorCreator(createDescriptor);
+	dw.postfix = "1.0 0.0 0.0";
 	dw.consume(fproducer);
 
 	fproducer.startProducing();
