@@ -8,7 +8,7 @@ class AbstractPoseDescriptor
 {
 public:
 	AbstractPoseDescriptor();
-	~AbstractPoseDescriptor();
+	virtual ~AbstractPoseDescriptor();
 
 	/**
 	 * @brief Compares this descriptor to another with given accuracy parameter

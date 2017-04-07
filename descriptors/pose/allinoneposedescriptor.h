@@ -7,13 +7,16 @@
 #include "common/backgrounddetector.h"
 #include "abstractposedescriptor.h"
 #include "histogramposedescriptor.h"
+#include "histogram/histogramdrawer.h"
 
 struct AllInOneDescriptorParams
 {
 	unsigned int histLength;
+	bool drawHistogram;
 
 	AllInOneDescriptorParams()
 	    : histLength(20)
+	    , drawHistogram(true)
 	{}
 };
 
@@ -21,7 +24,7 @@ class AllInOnePoseDescriptor : public AbstractPoseDescriptor
 {
 public:
 	AllInOnePoseDescriptor(AllInOneDescriptorParams params = AllInOneDescriptorParams());
-	~AllInOnePoseDescriptor();
+	virtual ~AllInOnePoseDescriptor() override;
 
 	void write(std::ostream &to);
 	std::vector<float>* getFeaturesVector();
@@ -34,6 +37,7 @@ private:
 	HistogramPoseDescriptor* hpd;
 	ShadowPreproducer preproducer;
 	BackgroundDetector* bgDetector;
+	HistogramDrawer* drawer;
 	std::vector<float>* features;
 
 	AllInOneDescriptorParams p;

@@ -34,9 +34,10 @@ DescriptorWriter::~DescriptorWriter()
 void DescriptorWriter::onNextFrameConsumed(cv::Mat &nextFrame)
 {
 	++framesElapsed;
+	// why it is created every frame? because it can be not stateless like all-in-one descriptor that accumulates background
+	AbstractPoseDescriptor* desc = creator(nextFrame);
 	if (framesElapsed % interval == 0)
 	{
-		AbstractPoseDescriptor* desc = creator(nextFrame);
 		if (desc != NULL)
 		{
 			std::vector<float>* features = desc->getFeaturesVector();

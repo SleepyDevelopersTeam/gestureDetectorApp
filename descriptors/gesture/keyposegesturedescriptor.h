@@ -10,7 +10,7 @@ public:
 	KeyPoseGestureDescriptor(unsigned int N, bool isAccumulator = false);
 	~KeyPoseGestureDescriptor();
 
-	bool similarTo(AbstractGestureDescriptor &anotherDescriptor);
+	virtual bool similarTo(AbstractGestureDescriptor &anotherDescriptor);
 
 	/**
 	 * @brief Should be called on every PoseDescriptor obtained. Will internally check if
@@ -18,7 +18,7 @@ public:
 	 * @param The obtained descriptor.
 	 * @return Whether the gesture descriptor was modified
 	 */
-	bool appendPose(AbstractPoseDescriptor* keyPoseCandidate, double accuracy);
+	virtual bool appendPose(AbstractPoseDescriptor* keyPoseCandidate, double accuracy);
 
 private:
 	int* poses;

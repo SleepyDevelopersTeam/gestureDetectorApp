@@ -1,10 +1,23 @@
 #include "allinoneposedescriptor.h"
+#include <opencv/cv.h>
+#include <opencv2/highgui.hpp>
+
+#define WNAME "Histograms"
 
 AllInOnePoseDescriptor::AllInOnePoseDescriptor(AllInOneDescriptorParams params)
 {
 	bgDetector = 0;
 	features = new std::vector<float>();
 	p = params;
+	if (params.drawHistogram)
+	{
+		drawer = new HistogramDrawer();
+		cv::namedWindow(WNAME);
+	}
+	else
+	{
+		drawer = NULL;
+	}
 }
 
 AllInOnePoseDescriptor::~AllInOnePoseDescriptor()
@@ -56,6 +69,12 @@ void AllInOnePoseDescriptor::accumulateNext(cv::Mat& nextFrame)
 		for (unsigned i = 0; i < len; i++)
 		{
 			features->push_back(keyPoseCandidate->getVertical()->at(i));
+		}
+
+		if (drawer != NULL)
+		{
+			drawer->draw(blob, *keyPoseCandidate);
+			cv::imshow(WNAME, drawer->canvas);
 		}
 	}
 }

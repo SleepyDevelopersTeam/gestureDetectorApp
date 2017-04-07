@@ -39,7 +39,11 @@ SOURCES += main.cpp \
     descriptors/pose/histogramposedescriptor.cpp \
     descriptors/gesture/keyposegesturedescriptor.cpp \
     common/utils/descriptorwriter.cpp \
-    descriptors/pose/allinoneposedescriptor.cpp
+    descriptors/pose/allinoneposedescriptor.cpp \
+    neuro/neuroclassifier.cpp \
+    gda/neurogda.cpp \
+    descriptors/gesture/neurokpgdescriptor.cpp \
+    gda/neurobsgda.cpp
 
 HEADERS += \
 	frameproducers/abstractframeproducer.h \
@@ -61,7 +65,11 @@ HEADERS += \
     descriptors/pose/histogramposedescriptor.h \
     descriptors/gesture/keyposegesturedescriptor.h \
     common/utils/descriptorwriter.h \
-    descriptors/pose/allinoneposedescriptor.h
+    descriptors/pose/allinoneposedescriptor.h \
+    neuro/neuroclassifier.h \
+    gda/neurogda.h \
+    descriptors/gesture/neurokpgdescriptor.h \
+    gda/neurobsgda.h
 
 
 include(libs.pri)

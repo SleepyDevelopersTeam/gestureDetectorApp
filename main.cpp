@@ -46,8 +46,8 @@ int main(int argc, char *argv[])
 	QCoreApplication a(argc, argv);
 	WebCameraFrameProducer fproducer;
 
-//	DisplayFrameConsumer displayer("Obtained image");
-//	displayer.consume(fproducer);
+	DisplayFrameConsumer displayer("Obtained image");
+	displayer.consume(fproducer);
 
 //	HistogramGDA gda(0);
 //	gda.enableOutput(true, true);
