@@ -40,7 +40,7 @@ void AllInOnePoseDescriptor::accumulateNext(cv::Mat& nextFrame)
 	bgDetector->accumulate(&grayscale);
 	bgDetector->getForegroundMask(grayscale);
 
-	// preproducer.preproduce(grayscale);
+//	 preproducer.preproduce(grayscale);
 
 	cv::Rect2i largestBlob = preproducer.findLargestBlob(grayscale);
 	features->clear();

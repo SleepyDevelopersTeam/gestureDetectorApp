@@ -5,6 +5,7 @@
 #include "frameproducers/webcameraframeproducer.h"
 #include "common/utils/displayframeconsumer.h"
 #include "gda/histogramgda.h"
+#include "gda/neurobsgda.h"
 #include "common/utils/descriptorwriter.h"
 #include "descriptors/pose/allinoneposedescriptor.h"
 
@@ -46,17 +47,23 @@ int main(int argc, char *argv[])
 	QCoreApplication a(argc, argv);
 	WebCameraFrameProducer fproducer;
 
-	DisplayFrameConsumer displayer("Obtained image");
-	displayer.consume(fproducer);
+//	DisplayFrameConsumer displayer("Obtained image");
+//	displayer.consume(fproducer);
+
+	setlocale(LC_ALL, "C");
+	NeuroBSGDA gda("classifier.net", 1, 3);
+	gda.consume(fproducer);
+
 
 //	HistogramGDA gda(0);
 //	gda.enableOutput(true, true);
 //	gda.consume(fproducer);
 
-	DescriptorWriter dw('s', 60, "test.txt");
-	dw.setDescriptorCreator(createDescriptor);
-	dw.postfix = "1.0 0.0 0.0";
-	dw.consume(fproducer);
+//	DescriptorWriter dw('s', 60, "test.txt");
+//	dw.setDescriptorCreator(createDescriptor);
+//	dw.postfix = "0.0 0.0 0.0";
+//	dw.consume(fproducer);
+
 
 	fproducer.startProducing();
 	return a.exec();

@@ -14,5 +14,7 @@ NeuroBSGDA::~NeuroBSGDA()
 void NeuroBSGDA::onNextFrameConsumed(cv::Mat &nextFrame)
 {
 	acc->accumulateNext(nextFrame);
-	onPoseCandidate(acc);
+	if (acc->featuresCount() != 0)
+		onPoseCandidate(acc);
+	// else bad features vector
 }
